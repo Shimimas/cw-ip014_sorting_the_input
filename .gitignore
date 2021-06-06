@@ -3,3 +3,4 @@ main
 testProg
 *.o
 *.a
+src
