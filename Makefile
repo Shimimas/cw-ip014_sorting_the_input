@@ -25,11 +25,5 @@ clean:
 	find . -name "*.a" -exec rm '{}' \;
 	find ./bin -type f -name "main" -exec rm -f '{}' \;
 	find ./bin -type f -name "test" -exec rm -f '{}' \;
-	find . -name "geometry" -exec rm {} \;
-	find . -name "geometry-test" -exec rm {} \;
-
-format:
-	cd src; find . -name "*.cpp" -exec clang-format -i {} \;
-	cd src; find . -name "*.h" -exec clang-format -i {} \;
 
 .PHONY: clean test run all
