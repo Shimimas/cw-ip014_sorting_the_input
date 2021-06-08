@@ -1,11 +1,11 @@
-#include "check.h"
+#ifndef CHECK_H_
+#define CHECK_H_
+
 #include <fstream>
 #include <iostream>
 #include <string>
 using namespace std;
 
-int main()
-{
-    Check();
-    return 0;
-}
+void Check();
+
+#endif

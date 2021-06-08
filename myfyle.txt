@@ -19,7 +19,7 @@ int main()
   }
   else
   {
-      fout << "\n";
+      fout << "\nнаши данные!";
   }
   
   fout.close();
@@ -55,10 +55,6 @@ int main()
            sc3++;
            if (str[i] == ')')
            sc4++;
-           if (str[i] == '[')
-           sc5++;
-           if (str[i] == ']')
-           sc6++;
          }
      }
      if (sc1==sc2)
