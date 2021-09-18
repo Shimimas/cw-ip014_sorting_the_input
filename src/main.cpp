@@ -6,6 +6,6 @@ using namespace std;
 
 int main()
 {
-    Check();
-    return 0;
+Check();
+return 0;
 }
