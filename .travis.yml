@@ -1,8 +1,14 @@
-sudo: false
+all: start
 
-language: node_js
-node_js:
-  - 9
+start: main.o check.o
+	$(CXX) $(CFLAGS) main.o check.o -o src/main
+	./src/main
+
+check.o:
+	$(CXX) $(CFLAGS) -c src/check.cpp -o check.o
+
+main.o:
+	$(CXX) $(CFLAGS) -c src/main.cpp -o main.o
 
 branches:
   only:
