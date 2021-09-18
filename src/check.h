@@ -7,6 +7,6 @@
 using namespace std;
 
 void Check();
-int Check(char * a, int b);
+int CheckA(char * a, int b);
 
 #endif

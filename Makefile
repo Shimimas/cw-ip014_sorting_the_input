@@ -1,29 +1,31 @@
-CFLAGS := -Wall -Werror -std=c++17
+CFLAGS := -Wall -Werror
 CXX := g++
 
-TARGET := bin/testProg
+all: start
 
-SOURCES := $(wildcard src/*.cpp)
+start: main.o check.o
+	$(CXX) $(CFLAGS) main.o check.o -o src/main
+	./src/main
 
-OBJ := $(patsubst src/%.cpp, obj/%.o, $(SOURCES))
+check.o:
+	$(CXX) $(CFLAGS) -c src/check.cpp -o check.o
 
-
-all:$(TARGET)
-
-$(TARGET): $(OBJ)
-	$(CXX) $(CFLAGS) -o $(TARGET) $(OBJ)
-
-obj/%.o: src/%.cpp
-	$(CXX) $(CFLAGS) -c $< -o $@
-
-run: $(TARGET)
-	./$(TARGET)
+main.o:
+	$(CXX) $(CFLAGS) -c src/main.cpp -o main.o
 
 clean:
 	find . -name "*.o" -exec rm '{}' \;
 	find . -name "*.d" -exec rm '{}' \;
 	find . -name "*.a" -exec rm '{}' \;
-	find ./bin -type f -name "main" -exec rm -f '{}' \;
-	find ./bin -type f -name "test" -exec rm -f '{}' \;
+	
+run: start clean
 
-.PHONY: clean test run all
+testing: teststart clean
+
+teststart: test.o check.o
+	$(CXX) $(CFLAGS) test.o check.o -o src/test
+	./src/test
+	
+test.o:
+	$(CXX) $(CFLAGS) -c src/test.cpp -o test.o
+	

@@ -1,6 +1,7 @@
 #include "check.h"
 
 int CheckA(char * string, int j) {
+int result = 1;
  for (int i = 0; i < j; i++) {
   if (string[i] == '{' && string[i + 1] == '}') {
    string[i] = '0';
@@ -60,6 +61,7 @@ int CheckA(char * string, int j) {
    ;
   } else {
    cout << "No balance!" << endl;
+   result = 0;
    break;
   }
   int z = 0;
@@ -73,10 +75,11 @@ int CheckA(char * string, int j) {
   }
   if (z == 2) {
    cout << "All right!" << endl;
+   result = 1;
    break;
   }
   }
-return 1;
+return result;
 }
 
 void Check() {
@@ -113,7 +116,6 @@ void Check() {
   while (!fin.eof()) {
    str = "";
    getline(fin, str);
-   //cout << str << endl;
   for (long unsigned int i = 0; i < str.length(); i++) {
    if (str[i] == '{') {
     sc1++;
