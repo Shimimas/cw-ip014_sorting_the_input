@@ -1,14 +1,82 @@
 #include "check.h"
 
 int CheckA(char * string, int j) {
- int ind = 1;
- for (int i = 0; i < (j-2)/2; i++) { 
-  if (string[i] != string[j - i - 1]) {
-   ind = 0;
+ for (int i = 0; i < j; i++) {
+  if (string[i] == '{' && string[i + 1] == '}') {
+   string[i] = '0';
+   string[i + 1] = '0';
+   i++;
+  }
+  if (string[i] == '(' && string[i + 1] == ')') {
+   string[i] = '0';
+   string[i + 1] = '0';
+   i++;
+  }
+  if (string[i] == '[' && string[i + 1] == ']') {
+   string[i] = '0';
+   string[i + 1] = '0';
+   i++;
+  }
+  }
+  char ind = 0;
+  for (int i = 0; i < j; i++) {
+   if (string[i] == '{' && string[i + 1] == '0') {
+   string[i] = '0';
+   ind = '}';
+  } else if (string[i] == '[' && string[i + 1] == '0') {
+   string[i] = '0';
+   ind = ']';
+  } else if (string[i] == '(' && string[i + 1] == '0') {
+   string[i] = '0';
+   ind = ')';
+  } else if (string[i] == '0' && string[i + 1] == '0') {
+   ;
+  } else if (string[i] == '0' && string[i + 1] == ind) {
+   string[i + 1] = '0';
+   i = 0;
+  } else if (string[i] == '[' && string[i + 1] == '[') {
+   ind = ']';
+  } else if (string[i] == '[' && string[i + 1] == '{') {
+   ind = ']';
+  } else if (string[i] == '[' && string[i + 1] == '(') {
+   ind = ']';
+  } else if (string[i] == '(' && string[i + 1] == '(') {
+   ind = ')';
+  } else if (string[i] == '(' && string[i + 1] == '{') {
+   ind = ')';
+  } else if (string[i] == '(' && string[i + 1] == '[') {
+   ind = ')';
+  } else if (string[i] == '{' && string[i + 1] == '(') {
+   ind = '}';
+  } else if (string[i] == '{' && string[i + 1] == '[') {
+   ind = '}';
+  } else if (string[i] == '{' && string[i + 1] == '{') {
+   ind = '}';
+  } else if (string[i] == '0' && string[i + 1] == '{') {
+   ;
+  } else if (string[i] == '0' && string[i + 1] == '[') {
+   ;
+  } else if (string[i] == '0' && string[i + 1] == '(') {
+   ;
+  } else {
+   cout << "No balance!" << endl;
    break;
   }
- }
-return ind;
+  int z = 0;
+  for (int i = 0; i < j; i++) {
+  if (string[i] != '0') {
+  z = 1;
+  break;
+  } else {
+  z = 2;
+  }
+  }
+  if (z == 2) {
+   cout << "All right!" << endl;
+   break;
+  }
+  }
+return 1;
 }
 
 void Check() {
@@ -45,49 +113,39 @@ void Check() {
   while (!fin.eof()) {
    str = "";
    getline(fin, str);
-   cout << str << endl;
+   //cout << str << endl;
   for (long unsigned int i = 0; i < str.length(); i++) {
    if (str[i] == '{') {
     sc1++;
     psc1[j] = '{';
-    cout << j <<endl;
     j++;
    }
    if (str[i] == '}' && sc1) {
     sc2++;
-    psc1[j] = '{';
-    cout << j <<endl;
+    psc1[j] = '}';
     j++;
    }
    if (str[i] == '(') {
     sc3++;
     psc1[j] = '(';
-    cout << j <<endl;
     j++;
    }
    if (str[i] == ')') {
     sc4++;
-    psc1[j] = '(';
-    cout << j <<endl;
+    psc1[j] = ')';
     j++;
    }
    if (str[i] == '[') {
     sc5++;
     psc1[j] = '[';
-    cout << j <<endl;
     j++;
    }
    if (str[i] == ']') {
     sc6++;
-    psc1[j] = '[';
-    cout << j <<endl;
+    psc1[j] = ']';
     j++;
    }
   }
- }
- cout << "KZKZKZK" <<endl;
- for (int m = 0; m < j; m++) {
-  cout << psc1[m] <<endl;
  }
  if (CheckA(psc1, j) == 1) {
   if (sc1 == sc2)
